@@ -30,7 +30,7 @@ async function checkusername(value) {
 }
 
 async function checkemail(value) {
-  const email = await User.findOne({ email:value });
+  const email = await User.findOne({ email: value });
 
   if (!email) {
     return {
@@ -43,7 +43,7 @@ async function checkemail(value) {
   }
 }
 
-async function register(username, email,password) {
+async function register(username, email, password) {
   let token;
   const user = new User({
     username,
@@ -57,8 +57,59 @@ async function register(username, email,password) {
   };
 }
 
+async function login(which, value, password) {
+  let token;
+  if (which == "username") {
+    const user = await User.findOne({ username: value });
+
+    if (user) {
+      if (user.password == password) {
+        token = jwt.sign({ _id: user.id }, data.Jwt_key);
+        return {
+          token,
+        };
+      } else {
+        return {
+          msg: "Your username or password incorrect",
+        };
+      }
+    } else {
+      return {
+        msg: "Your username or password incorrect",
+      };
+    }
+  } else {
+    const user = await User.findOne({ email: value });
+    if (user) {
+      if (user.password == password) {
+        token = jwt.sign({ _id: user.id }, data.Jwt_key);
+
+        return {
+          token,
+        };
+      } else {
+        return {
+          msg: "Your username or password incorrect",
+        };
+      }
+    } else {
+      return {
+        msg: "Your username or password incorrect",
+      };
+    }
+  }
+}
+
+async function getuserbyjwt(userjwt){
+  const decode = jwt.verify(userjwt, data.Jwt_key);
+  let user = await User.findOne({ _id: decode });
+  return user
+}
+
 module.exports = {
   checkusername,
   checkemail,
-  register
+  register,
+  login,
+  getuserbyjwt
 };

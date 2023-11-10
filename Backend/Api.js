@@ -18,11 +18,26 @@ app.get("/register/checkemail/:value", (req, res) => {
 });
 
 app.post("/register", (req, res) => {
-  
   userDB
     .register(req.body.username, req.body.email, req.body.password)
     .then((data) => res.send(data));
 });
 ///
+
+//Login
+
+app.post("/login", (req, res) => {
+  userDB
+    .login(req.body.which, req.body.username, req.body.password)
+    .then((data) => res.send(data));
+});
+//
+
+//Home
+
+app.get("/home/user/:jwt", (req, res) => {
+  userDB.getuserbyjwt(req.params.jwt).then((data) => res.send(data));
+});
+//
 
 app.listen(3000, () => console.log("listen"));

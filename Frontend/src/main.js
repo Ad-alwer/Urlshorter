@@ -8,10 +8,13 @@ import bootstrap from "bootstrap/dist/js/bootstrap.bundle.js";
 
 import home from "./components/home.vue";
 import register from "./components/Register.vue"
+import login from "./components/Login.vue"
 
 const routes = [
   { path: "/", component: home },
   { path: "/register", component: register },
+  { path: "/login", component: login },
+
 ];
 
 const router = createRouter({

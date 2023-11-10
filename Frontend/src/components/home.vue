@@ -4,17 +4,31 @@
     <div class="container pt-5">
       <header class="d-flex align-items-baseline justify-content-between">
         <p class="text-center text-uppercase pointer fs-3 fw-bold">linkey</p>
-        <div class="d-flex gap-3">
-          <button
-            class="btn text-white text-center px-3 py-2 pointer text-capitalize login"
-          >
-            login
-          </button>
-          <button
-            class="btn text-white text-center px-3 py-2 pointer text-capitalize register"
-          >
-            register now
-          </button>
+        <div>
+          <div class="d-flex gap-3" v-if="!login">
+            <button
+              class="btn text-white text-center px-3 py-2 pointer text-capitalize login"
+              @click="goto('/login')"
+            >
+              login
+            </button>
+            <button
+              class="btn text-white text-center px-3 py-2 pointer text-capitalize register"
+              @click="goto('/register')"
+            >
+              register now
+            </button>
+          </div>
+          <div class="login " v-else>
+            <button
+              class="btn text-white text-center px-3 py-2 pointer text-capitalize "
+              
+            >
+             {{user.username}}
+            </button>
+            <Icon icon="icon-park-outline:down" class="me-2 pointer" width="22" height="22" />
+
+          </div>
         </div>
       </header>
       <div class="mt-5 pt-5">
@@ -102,17 +116,40 @@
 </template>
 
 <script>
+import login from "./Login.vue";
+import { Icon } from '@iconify/vue';
+
+import Data from "../../default";
+import axios from "axios";
+const apiadress = Data.Api_Adress;
 export default {
   /* eslint-disable */
   name: "home",
+  beforeMount() {
+    const jwt = login.methods.getcookies("jwt");
+    jwt ? (this.login = true) : (this.login = false);
+    if (jwt) {
+      axios
+        .get(`${apiadress}home/user/${jwt}`)
+        .then((res) => (this.user = res.data));
+    }
+  },
+  components: {
+		Icon,
+	},
   data() {
     return {
       autocopy: true,
+      login: true,
+      user: {},
     };
   },
   methods: {
     submit: function () {
       console.log(this.$refs.urlinp.value);
+    },
+    goto: function (e) {
+      location.href = e;
     },
   },
 };
