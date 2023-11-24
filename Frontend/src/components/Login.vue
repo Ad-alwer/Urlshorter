@@ -65,6 +65,7 @@ const Toast = Swal.mixin({
   position: "top-end",
   showConfirmButton: false,
   theme: "dark",
+  customClass: { title: 'center-toast',},
   timer: 3000,
   timerProgressBar: true,
   didOpen: (toast) => {
@@ -117,6 +118,11 @@ export default {
               setTimeout(() => {
                 location.href = "/";
               }, 500);
+            }else if(res.data.msg){
+              Toast.fire({
+                icon: "error",
+                title: `${res.data.msg}`,
+              });
             }
           });
       } else {
@@ -258,5 +264,10 @@ input[type=checkbox]{
 }
 .span {
   font-size: 12px;
+}
+.center-toast {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 </style>

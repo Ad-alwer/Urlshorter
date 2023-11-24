@@ -70,12 +70,12 @@ async function login(which, value, password) {
         };
       } else {
         return {
-          msg: "Your username or password incorrect",
+          msg: "Your data was incorrect",
         };
       }
     } else {
       return {
-        msg: "Your username or password incorrect",
+        msg: "Your data was incorrect",
       };
     }
   } else {
@@ -89,21 +89,66 @@ async function login(which, value, password) {
         };
       } else {
         return {
-          msg: "Your username or password incorrect",
+          msg: "Your data was incorrect",
         };
       }
     } else {
       return {
-        msg: "Your username or password incorrect",
+        msg: "Your data was incorrect",
       };
     }
   }
 }
 
-async function getuserbyjwt(userjwt){
+async function getuserbyjwt(userjwt) {
   const decode = jwt.verify(userjwt, data.Jwt_key);
   let user = await User.findOne({ _id: decode });
-  return user
+  return user;
+}
+
+async function addlink(id, linkdetail) {
+  const user = await User.findById(id);
+  let userlinks = user.links;
+  userlinks.push(linkdetail);
+  await User.findByIdAndUpdate(id, {
+    $set: {
+      links: userlinks,
+    },
+  });
+  return {
+    msg: "Link saved",
+  };
+}
+
+async function uniqelink(id, fulllink) {
+  const user = await User.findById(id);
+ 
+
+  let userlinks = user.links;
+  const check = userlinks.find((e) => {
+    return e.fulllink === fulllink;
+  });
+  if (!check) {
+    return true;
+  } else {
+    return false;
+  }
+}
+
+async function removelink(userid, linkid) {
+  const user = await User.findById(userid);
+  let userlinks = user.links;
+  const index = userlinks.findIndex((e) => {
+    return e.id === linkid
+  });
+  userlinks.splice(index, 1);
+  await User.findByIdAndUpdate(userid, {
+    $set: {
+      links: userlinks,
+    },
+  });
+  return true
+  
 }
 
 module.exports = {
@@ -111,5 +156,8 @@ module.exports = {
   checkemail,
   register,
   login,
-  getuserbyjwt
+  getuserbyjwt,
+  addlink,
+  uniqelink,
+  removelink
 };
