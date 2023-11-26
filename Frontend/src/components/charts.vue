@@ -68,7 +68,7 @@ Icon
           labels: this.label,
           datasets: [
             {
-              label: "Link",
+              label: "view",
               color: "white",
               data: this.data,
               borderWidth: 1,

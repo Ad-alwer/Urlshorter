@@ -12,6 +12,7 @@ import register from "./components/Register.vue"
 import login from "./components/Login.vue"
 import chart from "./components/charts.vue"
 import links from "./components/links.vue"
+import notfound from "./components/404.vue"
 
 const routes = [
   { path: "/", component: home },
@@ -19,6 +20,8 @@ const routes = [
   { path: "/login", component: login },
   { path: "/profile/chart", component: chart },
   { path: "/profile/links", component: links },
+  { path: "/:pathMatch(.*)", component: notfound },
+
 
 
 
