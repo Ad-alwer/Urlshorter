@@ -78,16 +78,21 @@ app.post("/home/link/delet", (req, res) => {
   });
 });
 
-app.get('/link/changestatus/:id',(req,res)=>{
-  linkDB.changestatus(req.params.id).then(data=>res.send(data))
-})
+app.get("/link/changestatus/:id", (req, res) => {
+  linkDB.changestatus(req.params.id).then((data) => res.send(data));
+});
 
-app.post('/link/changeurl',(req,res)=>{
- 
-
-  linkDB.changeurl(req.body.id,req.body.url).then(data=>res.send(data))
-})
+app.post("/link/changeurl", (req, res) => {
+  linkDB.changeurl(req.body.id, req.body.url).then((data) => res.send(data));
+});
 
 //
+
+//Profile
+app.get("/profile/chart/:jwt", (req, res) => {
+  userDB.getuserbyjwt(req.params.jwt).then((data) => {
+    userDB.getlastfivelink(data._id).then((data) => res.send(data));
+  });
+});
 
 app.listen(3000, () => console.log("listen"));

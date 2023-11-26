@@ -302,16 +302,7 @@ export default {
     copy: function (e) {
       navigator.clipboard.writeText(e.target.innerHTML);
     },
-    remove: function (linkid) {
-      axios
-        .post(`${apiadress}home/link/delet`, {
-          linkid,
-          userid: this.user._id,
-        })
-        .then((res) => {
-          console.log(res.data);
-        });
-    },
+   
     changestatus: function (id) {
       axios.get(`${apiadress}link/changestatus/${id}`).then((res) => {
         if (res.data) {

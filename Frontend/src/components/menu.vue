@@ -1,15 +1,21 @@
 <!-- eslint-disable vue/require-v-for-key -->
 <template>
   <div id="popup">
-    <div class="popup-inner  rounded-4">
+    <div class="popup-inner rounded-4">
       <ul class="">
-        <li class="list-unstyled d-flex p-0 m-0 justify-content-around  pointer align-items-center border-secondary border-bottom pb-4 ">
+        <li
+          class="list-unstyled d-flex p-0 pt-2 m-0 justify-content-around pointer align-items-center border-secondary border-bottom pb-4"
+          @click="goto('/profile/chart')"
+        >
           <Icon icon="lucide:line-chart" width="25" height="25" />
-          <span>Chart</span>
+          <span >Chart</span>
         </li>
-        <li class="list-unstyled d-flex p-0 m-0 justify-content-around   pointer align-items-center mt-4">
+        <li
+          class="list-unstyled d-flex p-0 m-0 justify-content-around pointer align-items-center mt-4"
+          @click="goto('/profile/links')"
+        >
           <Icon icon="ri:links-fill" width="25" height="25" />
-          <span>Links</span>
+          <span >Links</span>
         </li>
       </ul>
     </div>
@@ -38,6 +44,10 @@ export default {
         this.close();
       }
     },
+    goto: function (e) {
+      location.href = e;
+    },
+    
   },
 };
 </script>
@@ -67,19 +77,14 @@ export default {
     border: 1px solid rgba(255, 255, 255, 0.466);
     color: white;
     position: relative;
-
     
   }
 }
-ul{
-    width: 150px;
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    padding: 0;
-    
-
-    
+ul {
+  width: 150px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  padding: 0;
 }
-
 </style>

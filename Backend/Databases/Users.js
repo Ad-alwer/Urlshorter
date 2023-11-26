@@ -151,6 +151,11 @@ async function removelink(userid, linkid) {
   
 }
 
+async function getlastfivelink(userid){
+  const user = await User.findById(userid)
+  return user.links.splice(0,5)
+}
+
 module.exports = {
   checkusername,
   checkemail,
@@ -159,5 +164,6 @@ module.exports = {
   getuserbyjwt,
   addlink,
   uniqelink,
-  removelink
+  removelink,
+  getlastfivelink
 };
