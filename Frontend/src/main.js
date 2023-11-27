@@ -13,6 +13,7 @@ import login from "./components/Login.vue"
 import chart from "./components/charts.vue"
 import links from "./components/links.vue"
 import notfound from "./components/404.vue"
+import redirect from "./components/redirect.vue"
 
 const routes = [
   { path: "/", component: home },
@@ -21,6 +22,10 @@ const routes = [
   { path: "/profile/chart", component: chart },
   { path: "/profile/links", component: links },
   { path: "/:pathMatch(.*)", component: notfound },
+  { path: "/notfound", component: notfound },
+  { path: "/link/:id", component: redirect },
+
+
 
 
 

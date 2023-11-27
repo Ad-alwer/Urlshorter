@@ -94,5 +94,11 @@ app.get("/profile/chart/:jwt", (req, res) => {
     userDB.getlastfivelink(data._id).then((data) => res.send(data));
   });
 });
+//
+
+//Redirect
+app.get("/link/:shortlink", (req, res) => {
+  linkDB.getlink(req.params.shortlink).then((data) => res.send(data));
+});
 
 app.listen(3000, () => console.log("listen"));
