@@ -13,7 +13,8 @@ const apiadress = Data.Api_Adress;
 export default{
     name:"redirect",
     beforeMount(){
-        this.shorturl = location.pathname.split("/link/")[1];
+        this.shorturl = location.pathname.split("/")[1];
+        console.log(this.shorturl);
         
         axios.get(`${apiadress}link/${this.shorturl}`).then(res=>{
             

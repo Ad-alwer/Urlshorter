@@ -23,7 +23,7 @@ const routes = [
   { path: "/profile/links", component: links },
   { path: "/:pathMatch(.*)", component: notfound },
   { path: "/notfound", component: notfound },
-  { path: "/link/:id", component: redirect },
+  { path: "/:id", component: redirect },
 
 
 

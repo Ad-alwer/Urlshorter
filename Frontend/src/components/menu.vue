@@ -7,15 +7,17 @@
           class="list-unstyled d-flex p-0 pt-2 m-0 justify-content-around pointer align-items-center border-secondary border-bottom pb-4"
           @click="goto('/profile/chart')"
         >
-          <Icon icon="lucide:line-chart" width="25" height="25" />
-          <span >Chart</span>
+          <Icon icon="lucide:line-chart" class="responsive d-none" width="20" height="25" />
+          <Icon icon="lucide:line-chart" class="none-responsive " width="25" height="25" />
+          <span>Chart</span>
         </li>
         <li
           class="list-unstyled d-flex p-0 m-0 justify-content-around pointer align-items-center mt-4"
           @click="goto('/profile/links')"
         >
-          <Icon icon="ri:links-fill" width="25" height="25" />
-          <span >Links</span>
+          <Icon icon="ri:links-fill" class="responsive d-none" width="20" height="25" />
+          <Icon icon="ri:links-fill" class="none-responsive " width="25" height="25" />
+          <span>Links</span>
         </li>
       </ul>
     </div>
@@ -47,7 +49,6 @@ export default {
     goto: function (e) {
       location.href = e;
     },
-    
   },
 };
 </script>
@@ -77,7 +78,6 @@ export default {
     border: 1px solid rgba(255, 255, 255, 0.466);
     color: white;
     position: relative;
-    
   }
 }
 ul {
@@ -86,5 +86,26 @@ ul {
   justify-content: center;
   flex-direction: column;
   padding: 0;
+}
+.responsive{
+  display: none;
+}
+
+@media screen and (max-width: 767px) {
+  #popup {
+    top: 15%;
+
+    right: 4%;
+  }
+  ul{
+    width: 80px;
+  }
+ 
+  .responsive{
+  display: block !important;
+}
+.none-responsive{
+display: none;
+}
 }
 </style>
